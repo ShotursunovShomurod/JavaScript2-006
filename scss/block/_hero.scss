@@ -7,27 +7,85 @@ $button-text-color: black;
 $modal-bg-color: rgba(0, 0, 0, 0.5);
 $modal-content-bg-color: #fefefe;
 
-.hero{
+.loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); // Optional background to make the spinner more visible
+
+  .lds-ring {
+    color: #1c4c5b;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+
+    div {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      margin: 8px;
+      border: 8px solid currentColor;
+      border-radius: 50%;
+      animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      border-color: currentColor transparent transparent transparent;
+    }
+
+    div:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+
+    div:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+
+    div:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+  }
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.hero {
   width: 100%;
   height: 100%;
   background: #5340b2;
-  .hero__wrapper{
+  display: flex;
+  justify-content: center;
+
+
+  .hero__wrapper {
     width: 100%;
-    .link{
+
+    .link {
       width: 100%;
       display: flex;
       justify-content: center;
       gap: 20px;
-      a{
-        color:#aaa;
+
+      a {
+        color: #aaa;
       }
     }
   }
+
   .hero__context {
     align-items: center;
     height: 100vh;
     display: flex;
     width: 100%;
+
     .card {
       background-color: $card-bg-color;
       border-radius: 15px;
@@ -37,39 +95,38 @@ $modal-content-bg-color: #fefefe;
       width: 32%;
       box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
       margin: 0 10px;
-        img {
-          width: 100%;
+
+      img {
+        width: 100%;
+      }
+
+      h3 {
+        margin: 15px 0 5px 0;
+        color: $card-title-color;
+      }
+
+      p {
+        padding: 0 15px;
+      }
+
+      button {
+        background-color: $button-bg-color;
+        border: none;
+        border-radius: 5px;
+        color: $button-text-color;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 15px;
+        padding: 10px 20px;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: $button-hover-bg-color;
         }
-      
-        h3 {
-          margin: 15px 0 5px 0;
-          color: $card-title-color;
-        }
-      
-        p {
-          padding: 0 15px;
-        }
-      
-        button {
-          background-color: $button-bg-color;
-          border: none;
-          border-radius: 5px;
-          color: $button-text-color;
-          cursor: pointer;
-          font-size: 16px;
-          margin: 15px;
-          padding: 10px 20px;
-          transition: background-color 0.3s;
-      
-          &:hover {
-            background-color: $button-hover-bg-color;
-          }
-        }
-  
+      }
     }
   }
 }
-
 
 .carousel {
   position: relative;
@@ -115,28 +172,28 @@ $modal-content-bg-color: #fefefe;
   background-color: $modal-bg-color;
   justify-content: center;
   align-items: center;
-}
 
-.modal-content {
-  background: #FFDD00;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 10px;
+  .modal-content {
+    background: #FFDD00;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
 
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
 
-    &:hover,
-    &:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
+      &:hover,
+      &:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
     }
   }
 }

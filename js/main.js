@@ -1,17 +1,18 @@
-const API__USERS = "https://jsonplaceholder.typicode.com";
-const hero__context = document.querySelector(".hero__context");
+const API_USERS = "https://jsonplaceholder.typicode.com";
+const heroContext = document.querySelector(".hero__context");
 const modal = document.getElementById("myModal");
 const modalBody = document.getElementById("modal-body");
 const closeModal = document.querySelector(".close");
 const prevButton = document.querySelector(".prev");
 const nextButton = document.querySelector(".next");
+const loading = document.querySelector(".loading");
 
 let usersData = [];
 const itemsPerPage = 3;
 let currentPage = 1;
 
 window.onload = function() {
-    fetchUsers(API__USERS);
+    fetchUsers(API_USERS);
 };
 
 closeModal.onclick = function() {
@@ -19,45 +20,48 @@ closeModal.onclick = function() {
 };
 
 window.onclick = function(event) {
-  if (event.target == modal) {
+  if (event.target === modal) {
     modal.style.display = "none";
   }
 };
 
 async function fetchUsers(api) {
     try {
+        loading.style.display = "flex"; // Show loading spinner
         let response = await fetch(`${api}/users`);
         usersData = await response.json();
         console.log(usersData);
-        createCard(); // Avvalgi kartalarni yaratish
+        createCard(); // Create cards after data is fetched
     } catch (err) {
         console.log(err);
+    } finally {
+        loading.style.display = "none"; // Hide loading spinner
     }
 }
 
 function createCard() {
-    hero__context.innerHTML = ''; // Avvalgi kartalarni tozalash
+    heroContext.innerHTML = ''; // Clear previous cards
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const paginatedData = usersData.slice(startIndex, endIndex);
 
-    paginatedData.forEach((post) => {
+    paginatedData.forEach((user) => {
         let card = document.createElement("div");
         card.classList.add("card");
         card.innerHTML = `
         <img src="./assets/men.png" alt="Profile Picture">
-        <h3>${post.name}</h3>
-        <p>${post.company.catchPhrase}</p>
-        <button onclick="showModal(${post.id})">View More</button>`;
+        <h3>${user.name}</h3>
+        <p>${user.company.catchPhrase}</p>
+        <button onclick="showModal(${user.id})">View More</button>`;
         
-        hero__context.appendChild(card);
+        heroContext.appendChild(card);
     });
 
     setupCarousel();
 }
 
 function showModal(id) {
-    fetch(`${API__USERS}/users/${id}`)
+    fetch(`${API_USERS}/users/${id}`)
         .then(response => response.json())
         .then(data => {
             modalBody.innerHTML = `
@@ -71,6 +75,9 @@ function showModal(id) {
                 <p><strong>Catch Phrase:</strong> ${data.company.catchPhrase}</p>
             `;
             modal.style.display = "flex";
+        })
+        .catch(error => {
+            console.error('Error fetching user details:', error);
         });
 }
 

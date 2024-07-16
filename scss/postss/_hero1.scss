@@ -1,0 +1,58 @@
+.posts {
+    width: 100%;
+    padding: 20px;
+    background-color: #525050;
+
+    .posts__wrapper {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: space-between;
+      
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+            width: 280px;
+            padding: 16px;
+            border-radius: 14px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            background-color: #ffffff; // Kartalar orqa fon rangi
+            .posts__link {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                // margin-bottom: 30px;
+                a {
+                    text-decoration: none;
+                    color: #ffffff; // Linklar matn rangi
+                    padding: 10px;
+                    margin: 0 10px;
+                    background-color: #007bff; // Link fon rangi
+                    border-radius: 5px;
+                    &:hover {
+                        background-color: #0056b3; // Hover holatidagi fon rangi
+                    }
+                    p {
+                        margin: 0;
+                    }
+                }
+            }
+            .posts__img {
+                width: 100%;
+                height: 200px; // Rasmning balandligi
+                background: #ddd; // Rasmning orqa fon rangi
+                border-radius: 14px;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover; // Rasmni to'liq ko'rsatish
+                }
+            }
+        }
+    }
+}
